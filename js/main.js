@@ -25,6 +25,35 @@ const initPage = async () => {
     // then use the access token provided to access data on the user's behalf
     showStories(token);
     showPosts(token);
+    showProfile(token);
 }
 
 initPage();
+const showProfile = token => {
+    fetch("https://photo-app-secured.herokuapp.com/api/profile/", {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        }
+    })
+    
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        const profileContainer = document.querySelector('header.aside-header');
+    
+        const profileImage = document.createElement('img');
+        profileImage.src = data.thumb_url;
+        profileContainer.appendChild(profileImage);
+        
+        const profileName = document.createElement('h3');
+        profileName.textContent = data.first_name;
+        profileContainer.appendChild(profileName);
+    
+        const profileBio = document.createElement('p');
+        profileBio.textContent = data.bio;
+        profileContainer.appendChild(profileBio);
+    });
+}
+
