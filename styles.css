@@ -104,7 +104,6 @@ aside {
 #text {
     display: flex;
     flex-direction: column;
-    align-items: right;
     margin-right: 10px;
 
 }
@@ -136,8 +135,8 @@ aside {
 
 #story-card{
     display: flex;
-    align-items: left;
-    justify-content: left;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
     padding: 10px;
 }
@@ -159,8 +158,8 @@ aside {
 
 #text-story {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: right;
+    justify-content: right;
     margin-bottom: 0px;
 }
 
@@ -230,6 +229,10 @@ section img {
     font-size: 25px;
     padding-top: 10px;
     padding-left: 15px;
+  }
+
+  .filled-heart {
+    color: red;
   }
 
 #likes{
