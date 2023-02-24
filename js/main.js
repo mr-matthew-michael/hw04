@@ -125,18 +125,21 @@ const showStoriesPanel = token => {
 
         // Loop through each suggested user and create an HTML representation for them
         data.forEach(user => {
-            console.log(user);
+            
             const userContainer = document.createElement('div');
             userContainer.id = 'story-card';
 
             const profileImage = document.createElement('img');
-            profileImage.src = user.image_url;
+            profileImage.src = user.user.image_url;
             profileImage.alt = 'Profile Image';
             userContainer.appendChild(profileImage);
 
             const textContainer = document.createElement('div');
             textContainer.id = 'text-story';
 
+            const profileBio = document.createElement('p');
+            profileBio.textContent = user.user.username;
+            textContainer.appendChild(profileBio);
 
             profileContainer.appendChild(userContainer);
         });
