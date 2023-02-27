@@ -191,19 +191,20 @@ const renderCard = (data) => {
             
             <div class="modal-bg hidden" aria-hidden="true" role="dialog" id= "modal-${data.id}">
                 <section class="modal">
-                    <button class="close" aria-label="Close the modal window" onclick="closeModal(${data.id});">Close</button>
+                <button class="close" aria-label="Close the modal window" onclick="closeModal(${data.id});"><i class="fa-solid fa-xmark" style="color: white; font-size: 4em;"></i></button>
                     <div class="modal-body">
                         <!-- Uses a background image -->
-                        <img src=${data.image_url} alt="placeholder image" width="600" height="430s">
-                        
-                            <section class="the-comments">
-                                ${data.comments.map(comment => `
-                                    <p>
-                                        <strong>${comment.user.username}</strong> 
-                                        ${comment.text}
-                                    </p>
-                                `).join('')}
-                            </section>
+                        <img src=${data.image_url} alt="placeholder image" width="600" height="430">
+                        <section class="the-comments">
+                        <p id ="modal-username"><strong>${data.user.username}</strong></p>
+                        ${data.comments.map(comment => `
+                          <p>
+                            <strong>${comment.user.username}</strong> 
+                            ${comment.text}<br><br>
+                            ${comment.display_time}
+                          </p>
+                        `).join('')}
+                      </section>
                         </div>
                 </section>
             </div>
