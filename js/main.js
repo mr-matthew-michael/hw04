@@ -25,43 +25,36 @@ const initPage = async () => {
     // then use the access token provided to access data on the user's behalf
     showStories(token);
     showPosts(token);
-    showProfile(token);
-    showRightPanel(token);
-    showStoriesPanel(token);
-    showFeedPanel2(token);
-    updateHeart(token);
+    getSuggestions(token);
+    getUserData(token);
+    getCard(token);
+    getStoriesData(token);
+    //getModalData(token);
+    
 }
 
 initPage();
-const showProfile = token => {
-    fetch("https://photo-app-secured.herokuapp.com/api/profile/", {
-        method: "GET",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-        }
-    })
-    
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        const profileContainer = document.querySelector('header.aside-header');
-    
-        const profileImage = document.createElement('img');
-        profileImage.src = data.thumb_url;
-        profileContainer.appendChild(profileImage);
-        
-        const profileName = document.createElement('h3');
-        profileName.textContent = data.first_name;
-        profileContainer.appendChild(profileName);
-    
-        const profileBio = document.createElement('p');
-        profileBio.textContent = data.bio;
-        profileContainer.appendChild(profileBio);
-    });
-}
 
-const showRightPanel = token => {
+/* SUGGESTIONS */
+const suggestionsContainer = document.querySelector('.suggestions');
+
+const renderSuggestions = (data) => {
+    suggestionsContainer.innerHTML = `
+        <p class="suggestion-text">Suggestions for you</p>
+        ${data.map((data) => `
+            <section>
+                <img src=${data.thumb_url} class="pic" />
+                <div>
+                    <p class="username">${data.username}</p>
+                    <p>suggested for you</p>
+                </div>
+                <button class="button">follow</button>
+            </section>
+        `).join('')}
+    `;
+};
+
+const getSuggestions = (token) => {
     fetch("https://photo-app-secured.herokuapp.com/api/suggestions/", {
         method: "GET",
         headers: {
@@ -71,46 +64,53 @@ const showRightPanel = token => {
     })
     .then(response => response.json())
     .then(data => {
-        const profileContainer = document.querySelector('#followers');
-
-        // Clear any existing suggestions in the container
-       profileContainer.innerHTML = '';
-
-        // Loop through each suggested user and create an HTML representation for them
-        data.forEach(user => {
-            const userContainer = document.createElement('div');
-            userContainer.id = 'sugg-followers';
-
-            const profileImage = document.createElement('img');
-            profileImage.src = user.image_url;
-            profileImage.alt = 'Profile Image';
-            userContainer.appendChild(profileImage);
-
-            const textContainer = document.createElement('div');
-            textContainer.id = 'text';
-
-            const profileName = document.createElement('h1');
-            profileName.textContent = user.username;
-            textContainer.appendChild(profileName);
-
-            const profileBio = document.createElement('p');
-            profileBio.textContent = 'suggested for you';
-            textContainer.appendChild(profileBio);
-
-            userContainer.appendChild(textContainer);
-
-            const followLink = document.createElement('a');
-            followLink.href = '';
-            followLink.textContent = 'Follow';
-            followLink.id = 'follow';
-            userContainer.appendChild(followLink);
-
-            profileContainer.appendChild(userContainer);
-        });
-    });
+        console.log('suggestions', data);
+        renderSuggestions(data);
+    });  
 };
 
-const showStoriesPanel = token => {
+const header = document.querySelector('header');
+
+const renderHeader = (data) => {
+    header.innerHTML = `
+        <img src=${data.thumb_url} class="pic" />
+        <h2>${data.username}</h2>
+    `;
+};
+
+/* USER HEADER */
+
+const getUserData = (token) => {
+    fetch("https://photo-app-secured.herokuapp.com/api/profile/", {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('user data', data);
+        renderHeader(data);
+    });  
+};
+
+/* STORIES */
+
+const storiesHeader = document.querySelector('.stories');
+
+const renderStoriesHeader = (data) => {
+    const storiesHtml = data.slice(0, 4).map((item) => `
+      <div>
+        <img src="${item.user.thumb_url}" class="pic" />
+        <p>${item.user.username}</p>
+      </div>
+    `).join('');
+    storiesHeader.innerHTML = storiesHtml;
+  };
+  
+
+const getStoriesData = (token) => {
     fetch("https://photo-app-secured.herokuapp.com/api/stories/", {
         method: "GET",
         headers: {
@@ -120,40 +120,118 @@ const showStoriesPanel = token => {
     })
     .then(response => response.json())
     .then(data => {
-        const profileContainer = document.querySelector('#story');
+        console.log('stories data', data);
+        renderStoriesHeader(data);
+    });  
+};
 
-        // Clear any existing suggestions in the container
-       profileContainer.innerHTML = '';
+/* POSTS */
+const cardContainer = document.querySelector('.card-container');
 
-        // Loop through each suggested user and create an HTML representation for them
-        data.slice(0,5).forEach(user => {
-            console.log(user.user.username);
-            const userContainer = document.createElement('div');
-            userContainer.id = 'story-card';
-
-            const profileImage = document.createElement('img');
-            profileImage.src = user.user.image_url;
-            profileImage.alt = 'Profile Image';
-            userContainer.appendChild(profileImage);
-
-
-            const textContainer = document.createElement('div');
-            textContainer.id = 'text-story';
+const renderCard = (data) => {
+    cardContainer.innerHTML = '';
+    cardContainer.innerHTML = `
+        ${data.map((data) => `
+            <section class="card">
+                <div class="header">
+                    <h3>${data.user.username}</h3>
+                    <button class="icon-button"><i class="fas fa-ellipsis-h"></i></button>
+                </div>
+                <img src=${data.image_url} alt="placeholder image" width="300" height="300">
+                <div class="info">
+                    <div class="buttons">
+                        <div>
+                            <button class="icon-button ${data.current_user_like_id ? 'liked' : ''}"><i class="${data.current_user_like_id ? 'fas' : 'far'} fa-heart"></i></button>
+                            <button class="icon-button"><i class="far fa-comment"></i></button>
+                            <button class="icon-button"><i class="far fa-paper-plane"></i></button>
+                        </div>
+                        <div>
+                            <button class="icon-button ${data.current_user_bookmark_id ? 'liked' : ''}"><i class="${data.current_user_bookmark_id ? 'fas' : 'far'} fa-bookmark"></i></button>
+                        </div>
+                    </div>
+                    <p class="likes"><strong>${data.likes.length} likes </strong></p>
+                    <div class="caption">
+                        <p>
+                            <strong>${data.user.username}</strong> 
+                            ${data.caption}
+                        </p>
+                        
+                    </div>
+                    <div class="comments">
+                        ${
+                            data.comments.length > 1 ?
+                            `
+                            <button class="view-comments" onclick="openModal(${data.id});">View all ${data.comments.length} comments</button>
+                            <p>
+                                <strong>${data.comments[data.comments.length - 1].user.username}</strong> 
+                                ${data.comments[data.comments.length - 1].text}
+                            </p>
+                            ` :
+                            data.comments.length === 1 ?
+                            `
+                            <p>
+                                <strong>${data.comments[0].user.username}</strong> 
+                                ${data.comments[0].text}
+                            </p>
+                            ` :
+                            ''
+                            
+                        }
+                        <p class="timestamp">${data.display_time}</p>
+                    </div>
+                </div>
+                <div class="add-comment">
+                    <div class="input-holder">
+                        <i class="far fa-smile"></i>
+                        <input type="text" placeholder="Add a comment...">
+                    </div>
+                    <button class="button">Post</button>
+                </div>
+            </section>
             
-            const profileBio = document.createElement('p');
-            profileBio.textContent = user.user.username;
-            textContainer.appendChild(profileBio);
+            <div class="modal-bg hidden" aria-hidden="true" role="dialog" id= "modal-${data.id}">
+                <section class="modal">
+                    <button class="close" aria-label="Close the modal window" onclick="closeModal(${data.id});">Close</button>
+                    <div class="modal-body">
+                        <!-- Uses a background image -->
+                        <img src=${data.image_url} alt="placeholder image" width="600" height="430s">
+                        
+                            <section class="the-comments">
+                                ${data.comments.map(comment => `
+                                    <p>
+                                        <strong>${comment.user.username}</strong> 
+                                        ${comment.text}
+                                    </p>
+                                `).join('')}
+                            </section>
+                        </div>
+                </section>
+            </div>
+        `).join('')}
+    `;
 
-            userContainer.appendChild(textContainer);
-            profileContainer.appendChild(userContainer);
+};  
 
-            console.log(profileContainer.outerHTML);
-        });
-    });
+window.openModal = ev => {
+    const modalElement = document.querySelector('#modal-' + ev);
+    modalElement.classList.remove('hidden');
+    modalElement.setAttribute('aria-hidden', 'false');
+    document.querySelector('.close').focus();
 }
 
-const showFeedPanel = token => {
-    fetch("https://photo-app-secured.herokuapp.com/api/posts/?limit=3", {
+window.closeModal = ev => {
+    const modalElement = document.querySelector('#modal-' + ev);
+    console.log('close!');
+    modalElement.classList.add('hidden');
+    modalElement.setAttribute('aria-hidden', 'true');
+    const openElement = document.querySelector('.open');
+    if (openElement) {
+        openElement.focus();
+    }
+}; 
+
+const getCard = (token) => {
+    fetch("https://photo-app-secured.herokuapp.com/api/posts/?limit=10", {
         method: "GET",
         headers: {
             'Content-Type': 'application/json',
@@ -162,178 +240,7 @@ const showFeedPanel = token => {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
-        data.slice(0,10).forEach(user => {
-            console.log(user.user.username);
-            
-            const userContainer = document.createElement('section');
-            userContainer.id = 'people-post';
-            console.log(userContainer.outerHTML);
-
-            const personName = document.createElement('div');
-            personName.id = 'heading';
-
-            const personHeading = document.createElement('h1');
-            personHeading.textContent = user.user.username;
-
-            userContainer.appendChild(personName);
-            userContainer.appendChild(personHeading);
-            console.log(userContainer.outerHTML);
-
-             /*
-            const textContainer = document.createElement('div');
-            textContainer.id = 'text-story';
-            
-            const profileBio = document.createElement('p');
-            profileBio.textContent = user.user.username;
-            textContainer.appendChild(profileBio);
-
-            userContainer.appendChild(textContainer);
-            profileContainer.appendChild(userContainer);
-            */
-        });
-    });
-}
-
-const showFeedPanel2 = token => {
-    fetch("https://photo-app-secured.herokuapp.com/api/posts/?limit=3", {
-        method: "GET",
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + token
-        }
-    })
-      .then(response => response.json())
-      .then(data => {
-        const postsContainer = document.querySelector("#people-post");
-        console.log(data);
-        // Clear any existing posts in the container
-        //postsContainer.innerHTML = "";
-  
-        // Loop through each post and create an HTML representation for them
-        data.forEach(post => {
-            //console.log(post.current_user_like_id);
-            const postContainer = document.createElement("section");
-            postContainer.id = "posts";
-
-            const heading = document.createElement("div");
-            heading.id = "heading";
-
-            const username = document.createElement("h1");
-            username.textContent = post.user.username;
-            heading.appendChild(username);
-
-            postContainer.appendChild(heading);
-
-            const postImage = document.createElement("img");
-            postImage.src = post.image_url;
-            postImage.alt = "Post Image";
-            postContainer.appendChild(postImage);
-
-            const contentBox = document.createElement("div");
-            contentBox.classList.add("contentbox");
-            const interact = document.createElement("div");
-            const interactDiv = document.createElement("div");
-            interactDiv.id = "interact";
-
-            const heartBtn = document.createElement("button");
-            heartBtn.id = "heart-button";
-            const heartIcon = document.createElement("i");
-            heartIcon.className = "far fa-heart";
-            heartBtn.style.backgroundColor = "transparent";
-            heartBtn.style.border = "none";
-            heartBtn.appendChild(heartIcon);
-            interactDiv.appendChild(heartBtn);
-            
-            heartBtn.addEventListener("click", function() {
-                console.log("Button was clicked!");
-                heartIcon.className = "fas fa-heart";
-                heartIcon.style.color = "red";
-            });
-
-            const commentIcon = document.createElement("i");
-            commentIcon.className = "far fa-comment";
-            interactDiv.appendChild(commentIcon);
-
-            const paperPlaneIcon = document.createElement("i");
-            paperPlaneIcon.className = "far fa-paper-plane";
-            interactDiv.appendChild(paperPlaneIcon);
-
-            const bookmarkIcon = document.createElement("i");
-            bookmarkIcon.className = "far fa-bookmark";
-            bookmarkIcon.id = "bookmark";
-            interactDiv.appendChild(bookmarkIcon);
-
-            postContainer.appendChild(interactDiv);
-
-            const likesDiv = document.createElement("div");
-            likesDiv.id = "likes";
-            const likesHeader = document.createElement("h1");
-            likesHeader.textContent = post.likes.length + " Likes";
-            likesDiv.appendChild(likesHeader);
-            postContainer.appendChild(likesDiv);
-
-  /*
-          const interact = document.createElement("div");
-          interact.classList.add("interact");
-  
-          const heartIcon = document.createElement("i");
-          heartIcon.classList.add("far", "fa-heart");
-          interact.appendChild(heartIcon);
-  
-          const commentIcon = document.createElement("i");
-          commentIcon.classList.add("far", "fa-comment");
-          interact.appendChild(commentIcon);
-  
-          const paperPlaneIcon = document.createElement("i");
-          paperPlaneIcon.classList.add("far", "fa-paper-plane");
-          interact.appendChild(paperPlaneIcon);
-  
-          const bookmarkIcon = document.createElement("i");
-          bookmarkIcon.id = "bookmark";
-          bookmarkIcon.classList.add("far", "fa-bookmark");
-          interact.appendChild(bookmarkIcon);
-  
-          contentBox.appendChild(interact);
-  
-          const likes = document.createElement("div");
-          likes.id = "likes";
-  
-          const likeCount = document.createElement("h1");
-          likeCount.textContent = post.likes_count + " likes";
-          likes.appendChild(likeCount);
-  
-          contentBox.appendChild(likes);
-  
-          post.comments.forEach(comment => {
-            const commentContainer = document.createElement("div");
-            commentContainer.classList.add("comment");
-  
-            const username = document.createElement("div");
-            username.id = "username";
-  
-            const boldSpan = document.createElement("span");
-            boldSpan.style.fontWeight = "bold";
-            boldSpan.textContent = comment.user.username + " ";
-            username.appendChild(boldSpan);
-  
-            username.textContent += comment.content;
-            commentContainer.appendChild(username);
-  
-            contentBox.appendChild(commentContainer);
-          });
-  
-          const timePassed = document.createElement("div");
-          timePassed.id = "time-passed";
-          //timePassed.textContent = getTimePassed(post.created_at);
-          contentBox.appendChild(timePassed);
-  */
-          //postContainer.appendChild(contentBox);
-          postsContainer.appendChild(postContainer);
-          console.log(postContainer.outerHTML);
-        });
-      });
-  };
-  
-
-
+        console.log('suggestions', data);
+        renderCard(data);
+    });  
+};

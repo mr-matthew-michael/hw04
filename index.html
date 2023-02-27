@@ -1,303 +1,331 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <title>Photo App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <script src="js/main.js" type="module" defer></script>
-    <title>Fixed positioning</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
-        .logo{
-            font-family: 'Comfortaa', cursive;
-        }
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-        }
-    </style>
 </head>
 <body>
-    <header id="topnav">
-        <h1 class="logo">
-            Photo App
-        </h1>
-        <nav class="user">
-            <nav>mister-matthew-michael</nav>
-            <a href="" class="signout">Sign Out</a>
-        </nav>
-    </header>
-    <main>
-        
-        <!-- Fix the aside to the right-hand side -->
-        <aside>
-            <header class="aside-header">
+    <nav>
+        <h1>Photo App</h1>
+        <ul>
+            <li><span>gibsonjack</span></li>
+            <li><a href="#">Sign out</a></li>
+        </ul>
+    </nav>
 
-            </header>
+    <aside>
+        <header>
+            <img src="https://picsum.photos/60/60?q=11" class="pic" />
+            <h2>gibsonjack</h2>
+        </header>
+        <div class="suggestions">
+            <p class="suggestion-text">Suggestions for you</p>
             <section>
-                <div id="suggestion">Suggestions for you</div>
-                <div id = "followers">
-                    <div id="sugg-followers">
-                        <img src="https://picsum.photos/30" alt="Profile Image">
-                        <div id="text">
-                            <h1>amandahuds</h1>
-                            <p>suggested for you</p>
-                        </div>
-                        <a href="" id="follow">Follow</a>
-                    </div>
-
-                    <div id="sugg-followers">
-                        <img src="https://picsum.photos/40" alt="Profile Image">
-                        <div id="text">
-                            <h1>qthorton</h1>
-                            <p>suggested for you</p>
-                        </div>
-                        <a href="" id="follow">Follow</a>
-                    </div>
-
-                    <div id="sugg-followers">
-                        <img src="https://picsum.photos/20" alt="Profile Image">
-                        <div id="text">
-                            <h1>kvonn</h1>
-                            <p>suggested for you</p>
-                        </div>
-                        <a href="" id="follow">Follow</a>
-                    </div>
-
-                    <div id="sugg-followers">
-                        <img src="https://picsum.photos/10" alt="Profile Image">
-                        <div id="text">
-                            <h1>kyle</h1>
-                            <p>suggested for you</p>
-                        </div>
-                        <a href="" id="follow">Follow</a>
-                    </div>
-
-                    <div id="sugg-followers">
-                        <img src="https://picsum.photos/60" alt="Profile Image">
-                        <div id="text">
-                            <h1>amandahuds</h1>
-                            <p>suggested for you</p>
-                        </div>
-                        <a href="" id="follow">Follow</a>
-                    </div>
-
+                <img src="https://picsum.photos/30/30?q=11" class="pic" />
+                <div>
+                    <p class="username">amandahudson</p>
+                    <p>suggested for you</p>
                 </div>
-
+                <button class="button">follow</button>
             </section>
-        </aside>
-        
-        <section class="news-feed">
-            <header id="story">
-                <div id="story-card">
-                    <img src="https://picsum.photos/60" alt="Profile Image">
-                    <div id="text-story">
-                        <p>gouldjennifer</p>
-                    </div>
+            <section>
+                <img src="https://picsum.photos/30/30?q=12" class="pic" />
+                <div>
+                    <p class="username">qthornton</p>
+                    <p>suggested for you</p>
                 </div>
+                <button class="button">follow</button>
+            </section>
+            <section>
+                <img src="https://picsum.photos/30/30?q=13" class="pic" />
+                <div>
+                    <p class="username">ynelson</p>
+                    <p>suggested for you</p>
+                </div>
+                <button class="button">follow</button>
+            </section>
+            <section>
+                <img src="https://picsum.photos/30/30?q=14" class="pic" />
+                <div>
+                    <p class="username">lauralyons</p>
+                    <p>suggested for you</p>
+                </div>
+                <button class="button">follow</button>
+            </section>
+            <section>
+                <img src="https://picsum.photos/30/30?q=15" class="pic" />
+                <div>
+                    <p class="username">robertsonkristen</p>
+                    <p>suggested for you</p>
+                </div>
+                <button class="button">follow</button>
+            </section>
 
-                <div id="story-card">
-                    <img src="https://picsum.photos/70" alt="Profile Image">
-                    <div id="text-story">
-                        <p>matthew16</p>
-                    </div>
-                </div>
+        </div>
+    </aside>
 
-                <div id="story-card">
-                    <img src="https://picsum.photos/80" alt="Profile Image">
-                    <div id="text-story">
-                        <p>sanchezjill</p>
-                    </div>
-                </div>
+    <main class="content">
+        <!-- Stories -->
+        <header class="stories">
+            <div>
+                <img src="https://picsum.photos/50/50?q=10" class="pic" />
+                <p>gouldjennifer</p>
+            </div>
+            <div>
+                <img src="https://picsum.photos/50/50?q=11" class="pic" />
+                <p>matthew16</p>
+            </div>
+            <div>
+                <img src="https://picsum.photos/50/50?q=12" class="pic" />
+                <p>sanchezjill</p>
+            </div>
+            <div>
+                <img src="https://picsum.photos/50/50?q=13" class="pic" />
+                <p>gloria62</p>
+            </div>
+            <div>
+                <img src="https://picsum.photos/50/50?q=14" class="pic" />
+                <p>jwright</p>
+            </div>
+        </header>
 
-                <div id="story-card">
-                    <img src="https://picsum.photos/90" alt="Profile Image">
-                    <div id="text-story">
-                        <p>gloria62</p>
+        <!-- Posts -->
+        <section class = "card-container">
+            <section class="card">
+                <div class="header">
+                    <h3>gibsonjack</h3>
+                    <button class="icon-button"><i class="fas fa-ellipsis-h"></i></button>
+                </div>
+                <img src="https://picsum.photos/300/200?q=1" alt="placeholder image" width="300" height="300">
+                <div class="info">
+                    <div class="buttons">
+                        <div>
+                            <button class="icon-button"><i class="far fa-heart"></i></button>
+                            <button class="icon-button"><i class="far fa-comment"></i></button>
+                            <button class="icon-button"><i class="far fa-paper-plane"></i></button>
+                        </div>
+                        <div>
+                            <button class="icon-button"><i class="far fa-bookmark"></i></button>
+                        </div>
+                    </div>
+                    <p class="likes"><strong>30 likes</strong></p>
+                    <div class="caption">
+                        <p>
+                            <strong>gibsonjack</strong> 
+                            Here is a caption about the photo. 
+                            Text text text text text text text text text
+                            text text text text text text text text... <button class="button">more</button>
+                        </p>
+                    </div>
+                    <div class="comments">
+                        <p>
+                            <strong>lizzie</strong> 
+                            Here is a comment text text text text text text text text.
+                        </p>
+                        <p>
+                            <strong>vanek97</strong> 
+                            Here is another comment text text text.
+                        </p>
+                        <p class="timestamp">1 day ago</p>
                     </div>
                 </div>
+                <div class="add-comment">
+                    <div class="input-holder">
+                        <i class="far fa-smile"></i>
+                        <input type="text" placeholder="Add a comment...">
+                    </div>
+                    <button class="button">Post</button>
+                </div>
+            </section>
 
-                <div id="story-card">
-                    <img src="https://picsum.photos/100" alt="Profile Image">
-                    <div id="text-story">
-                        <p>jwright</p>
+            <section class="card">
+                <div class="header">
+                    <h3>lindseychandler</h3>
+                    <button class="icon-button"><i class="fas fa-ellipsis-h"></i></button>
+                </div>
+                <img src="https://picsum.photos/300/200?q=2" alt="placeholder image" width="300" height="300">
+                <div class="info">
+                    <div class="buttons">
+                        <div>
+                            <button class="icon-button"><i class="far fa-heart"></i></button>
+                            <button class="icon-button"><i class="far fa-comment"></i></button>
+                            <button class="icon-button"><i class="far fa-paper-plane"></i></button>
+                        </div>
+                        <div>
+                            <button class="icon-button"><i class="far fa-bookmark"></i></button>
+                        </div>
+                    </div>
+                    <p class="likes"><strong>30 likes</strong></p>
+                    <div class="caption">
+                        <p>
+                            <strong>lindseychandler</strong> 
+                            Here is a caption about the photo. 
+                            Text text text text text text text text text
+                            text text text text text text text text... <button class="button">more</button>
+                        </p>
+                    </div>
+                    <div class="comments">
+                        <p>
+                            <strong>lizzie</strong> 
+                            Here is a comment text text text text text text text text.
+                        </p>
+                        <p>
+                            <strong>vanek97</strong> 
+                            Here is another comment text text text.
+                        </p>
+                        <p class="timestamp">1 day ago</p>
                     </div>
                 </div>
-            </header>
-            <section id="people-post">
-                <section id="posts">
-                    <div id="heading">
-                        <h1>tommiller</h1>
-                        <i class="fas fa-ellipsis-h"></i>
+                <div class="add-comment">
+                    <div class="input-holder">
+                        <i class="far fa-smile"></i>
+                        <input type="text" placeholder="Add a comment...">
                     </div>
-                    <img src="https://picsum.photos/401/596" alt="Profile Image">
-                    <div id="content-box">
-                        <div id="interact">
-                            <i class="far fa-heart"></i>
-                            <i class="far fa-comment"></i>
-                            <i class="far fa-paper-plane"></i>
-                            <i id="bookmark" class="far fa-bookmark"></i>
+                    <button class="button">Post</button>
+                </div>
+            </section>
+
+            <section class="card">
+                <div class="header">
+                    <h3>brandonmiller</h3>
+                    <button class="icon-button"><i class="fas fa-ellipsis-h"></i></button>
+                </div>
+                <img src="https://picsum.photos/300/200?q=3" alt="placeholder image" width="300" height="300">
+                <div class="info">
+                    <div class="buttons">
+                        <div>
+                            <button class="icon-button"><i class="far fa-heart"></i></button>
+                            <button class="icon-button"><i class="far fa-comment"></i></button>
+                            <button class="icon-button"><i class="far fa-paper-plane"></i></button>
                         </div>
-                        <div id ="likes">
-                            <h1>30 likes</h1>
-                        </div>
-                        <div id="comment">
-                            <div id="username">
-                                <span style="font-weight: bold;">gibsonjack</span> Here is caption about the photo. Text text text text text text text text text text text text text text...
-                            </div>
-                            
-                        </div>
-                        <div id="comment">
-                            <div id="username">
-                                <span style="font-weight: bold;">lizzie</span> here is a comment. Text text text text text text text text text
-                            </div>
-                        </div>
-                        <div id="comment">
-                            <div id="username">
-                                <span style="font-weight: bold;">vanek</span> here is a comment. Text text text text text text text text text
-                            </div>
-                        </div>
-                        <div id="time-passed">1 DAY AGO</div>
-                    </div>
-                    <h2></h2>
-                    <div id="comment-box">
-                        <div id="interact">
-                            <i class="far fa-smile"></i>
-                            <div id="comment">Add a comment... </div>
-                            <a href="" id="post">Post</a>
+                        <div>
+                            <button class="icon-button"><i class="far fa-bookmark"></i></button>
                         </div>
                     </div>
-                </section>
-                <section id="posts">
-                    <div id="heading">
-                        <h1>matthewco</h1>
-                        <i class="fas fa-ellipsis-h"></i>
+                    <p class="likes"><strong>30 likes</strong></p>
+                    <div class="caption">
+                        <p>
+                            <strong>brandonmiller</strong> 
+                            Here is a caption about the photo. 
+                            Text text text text text text text text text
+                            text text text text text text text text... <button class="button">more</button>
+                        </p>
                     </div>
-                    <img src="https://picsum.photos/402/596" alt="Profile Image">
-                    <div id="content-box">
-                        <div id="interact">
-                            <i class="far fa-heart"></i>
-                            <i class="far fa-comment"></i>
-                            <i class="far fa-paper-plane"></i>
-                            <i id="bookmark" class="far fa-bookmark"></i>
-                        </div>
-                        <div id ="likes">
-                            <h1>30 likes</h1>
-                        </div>
-                        <div id="comment">
-                            <div id="username">
-                                <span style="font-weight: bold;">gibsonjack</span> Here is caption about the photo. Text text text text text text text text text text text text text text...
-                            </div>
-                            
-                        </div>
-                        <div id="comment">
-                            <div id="username">
-                                <span style="font-weight: bold;">lizzie</span> here is a comment. Text text text text text text text text text
-                            </div>
-                        </div>
-                        <div id="comment">
-                            <div id="username">
-                                <span style="font-weight: bold;">vanek</span> here is a comment. Text text text text text text text text text
-                            </div>
-                        </div>
-                        <div id="time-passed">1 DAY AGO</div>
+                    <div class="comments">
+                        <p>
+                            <strong>lizzie</strong> 
+                            Here is a comment text text text text text text text text.
+                        </p>
+                        <p>
+                            <strong>vanek97</strong> 
+                            Here is another comment text text text.
+                        </p>
+                        <p class="timestamp">1 day ago</p>
                     </div>
-                    <h2></h2>
-                    <div id="comment-box">
-                        <div id="interact">
-                            <i class="far fa-smile"></i>
-                            <div id="comment">Add a comment... </div>
-                            <a href="" id="post">Post</a>
-                        </div>
+                </div>
+                <div class="add-comment">
+                    <div class="input-holder">
+                        <i class="far fa-smile"></i>
+                        <input type="text" placeholder="Add a comment...">
                     </div>
-                </section>
-                <section id="posts">
-                    <div id="heading">
-                        <h1>johnmarti</h1>
-                        <i class="fas fa-ellipsis-h"></i>
-                    </div>
-                    <img src="https://picsum.photos/403/596" alt="Profile Image">
-                    <div id="content-box">
-                        <div id="interact">
-                            <i class="far fa-heart"></i>
-                            <i class="far fa-comment"></i>
-                            <i class="far fa-paper-plane"></i>
-                            <i id="bookmark" class="far fa-bookmark"></i>
+                    <button class="button">Post</button>
+                </div>
+            </section>
+
+            <section class="card">
+                <div class="header">
+                    <h3>debramcdaniel</h3>
+                    <button class="icon-button"><i class="fas fa-ellipsis-h"></i></button>
+                </div>
+                <img src="https://picsum.photos/300/200?q=4" alt="placeholder image" width="300" height="300">
+                <div class="info">
+                    <div class="buttons">
+                        <div>
+                            <button class="icon-button"><i class="far fa-heart"></i></button>
+                            <button class="icon-button"><i class="far fa-comment"></i></button>
+                            <button class="icon-button"><i class="far fa-paper-plane"></i></button>
                         </div>
-                        <div id ="likes">
-                            <h1>30 likes</h1>
-                        </div>
-                        <div id="comment">
-                            <div id="username">
-                                <span style="font-weight: bold;">gibsonjack</span> Here is caption about the photo. Text text text text text text text text text text text text text text...
-                            </div>
-                            
-                        </div>
-                        <div id="comment">
-                            <div id="username">
-                                <span style="font-weight: bold;">lizzie</span> here is a comment. Text text text text text text text text text
-                            </div>
-                        </div>
-                        <div id="comment">
-                            <div id="username">
-                                <span style="font-weight: bold;">vanek</span> here is a comment. Text text text text text text text text text
-                            </div>
-                        </div>
-                        <div id="time-passed">1 DAY AGO</div>
-                    </div>
-                    <h2></h2>
-                    <div id="comment-box">
-                        <div id="interact">
-                            <i class="far fa-smile"></i>
-                            <div id="comment">Add a comment... </div>
-                            <a href="" id="post">Post</a>
+                        <div>
+                            <button class="icon-button"><i class="far fa-bookmark"></i></button>
                         </div>
                     </div>
-                </section>
-                <section id="posts">
-                    <div id="heading">
-                        <h1>debmarker</h1>
-                        <i class="fas fa-ellipsis-h"></i>
+                    <p class="likes"><strong>30 likes</strong></p>
+                    <div class="caption">
+                        <p>
+                            <strong>debramcdaniel</strong> 
+                            Here is a caption about the photo. 
+                            Text text text text text text text text text
+                            text text text text text text text text... <button class="button">more</button>
+                        </p>
                     </div>
-                    <img src="https://picsum.photos/404/596" alt="Profile Image">
-                    <div id="content-box">
-                        <div id="interact">
-                            <i class="far fa-heart"></i>
-                            <i class="far fa-comment"></i>
-                            <i class="far fa-paper-plane"></i>
-                            <i id="bookmark" class="far fa-bookmark"></i>
-                        </div>
-                        <div id ="likes">
-                            <h1>30 likes</h1>
-                        </div>
-                        <div id="comment">
-                            <div id="username">
-                                <span style="font-weight: bold;">gibsonjack</span> Here is caption about the photo. Text text text text text text text text text text text text text text...
-                            </div>
-                            
-                        </div>
-                        <div id="comment">
-                            <div id="username">
-                                <span style="font-weight: bold;">lizzie</span> here is a comment. Text text text text text text text text text
-                            </div>
-                        </div>
-                        <div id="comment">
-                            <div id="username">
-                                <span style="font-weight: bold;">vanek</span> here is a comment. Text text text text text text text text text
-                            </div>
-                        </div>
-                        <div id="time-passed">1 DAY AGO</div>
+                    <div class="comments">
+                        <p>
+                            <strong>lizzie</strong> 
+                            Here is a comment text text text text text text text text.
+                        </p>
+                        <p>
+                            <strong>vanek97</strong> 
+                            Here is another comment text text text.
+                        </p>
+                        <p class="timestamp">1 day ago</p>
                     </div>
-                    <h2></h2>
-                    <div id="comment-box">
-                        <div id="interact">
-                            <i class="far fa-smile"></i>
-                            <div id="comment">Add a comment... </div>
-                            <a href="" id="post">Post</a>
+                </div>
+                <div class="add-comment">
+                    <div class="input-holder">
+                        <i class="far fa-smile"></i>
+                        <input type="text" placeholder="Add a comment...">
+                    </div>
+                    <button class="button">Post</button>
+                </div>
+            </section>
+
+            <section class="card">
+                <div class="header">
+                    <h3>sharpmargaret</h3>
+                    <button class="icon-button"><i class="fas fa-ellipsis-h"></i></button>
+                </div>
+                <img src="https://picsum.photos/300/200?q=5" alt="placeholder image" width="300" height="300">
+                <div class="info">
+                    <div class="buttons">
+                        <div>
+                            <button class="icon-button"><i class="far fa-heart"></i></button>
+                            <button class="icon-button"><i class="far fa-comment"></i></button>
+                            <button class="icon-button"><i class="far fa-paper-plane"></i></button>
+                        </div>
+                        <div>
+                            <button class="icon-button"><i class="far fa-bookmark"></i></button>
                         </div>
                     </div>
-                </section>
+                    <p class="likes"><strong>30 likes</strong></p>
+                    <div class="caption">
+                        <p>
+                            <strong>sharpmargaret</strong> 
+                            Here is a caption about the photo. 
+                            Text text text text text text text text text
+                            text text text text text text text text... <button class="button">more</button>
+                        </p>
+                    </div>
+                    <div class="comments">
+                        <p>
+                            <strong>lizzie</strong> 
+                            Here is a comment text text text text text text text text.
+                        </p>
+                        <p>
+                            <strong>vanek97</strong> 
+                            Here is another comment text text text.
+                        </p>
+                        <p class="timestamp">1 day ago</p>
+                    </div>
+                </div>
+                <div class="add-comment">
+                    <div class="input-holder">
+                        <i class="far fa-smile"></i>
+                        <input type="text" placeholder="Add a comment...">
+                    </div>
+                    <button class="button">Post</button>
+                </div>
             </section>
         </section>
     </main>
