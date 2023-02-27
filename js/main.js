@@ -222,7 +222,7 @@ window.openModal = ev => {
     modalElement.setAttribute('aria-hidden', 'false');
     document.querySelector('#close').focus();
 }
-
+ 
 window.closeModal = ev => {
     const modalElement = document.querySelector('#modal-' + ev);
     console.log('close!');
